@@ -1,0 +1,447 @@
+---
+title: |
+  | SANBI-GBIF training - Species Distribution Modelling:
+  | <font size="8">1. Intro to R</font>
+author: "Vernon Visser"
+output: 
+   xaringan::moon_reader:
+      css: xaringan-themer.css
+      nature:
+         highlightStyle: default
+         highlightLines: true
+         countIncrementalSlides: false
+      includes: 
+        after_body: insert-logo.html
+---
+
+<style>
+pre code, pre, code {
+   overflow-x: visible !important;
+   white-space: pre-wrap;
+}
+.remark-slide-content {
+    font-size: 16px;
+    padding: 0.5em 2em 0.5em 2em;
+}
+.remark-code {
+  font-size: 12px;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, error = T)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_mono_light(base_color = "#23395b")
+```
+
+### What is R?
+
+R is a free software environment for statistical computing and graphics. It is probably the most commonly used software used for data analysis in academia and is also widely used in the private sector.
+
+To download R, go to <a href="https://cran.r-project.org/" target="_blank">CRAN</a>. 
+
+Choose your operating system (Linux / MacOS / Windows). The steps outlined below are for Windows.
+
+Select "install R for the first time" and then "Download R..."
+
+New versions of R come out regularly and it is a good idea to update regularly. Upgrading can be a pain because you need to reinstall all your packages, but putting it off only makes it worse.
+
+---
+
+### RStudio
+
+<a href="http://www.rstudio.com/download" target="_blank">RStudio</a> is an integrated development environment, or IDE, for R programming.
+
+RStudio has four main panels. The **script editor** is where we will be writing out and saving our code. The **console** is the "brain", which shows the calculations and code outputs. The **environment** shows stored items in the "brain". The **"outputs"** panel can be used for a number of things, including installing packages and viewing plots and help documentation.
+
+<center>
+<img src="https://github.com/vervis/SANBI-GBIF_Data_Management_and_Cleaning/blob/images/RIntro_1rstudio-console.png?raw=true" style="width: 45%" class="center" />
+</center>
+
+---
+
+### R4DS
+
+We are going to be using material from the online book, <a href="https://r4ds.had.co.nz/introduction.html" target="_blank">R for Data Science</a>, to introduce you to R. This is a really exceptional book for learning about R and I strongly encourage you to go through it in more detail in your own time. However, we will just touch on a few key concepts to get you started with using R.
+
+<center>
+<img src="https://github.com/vervis/SANBI-GBIF_Data_Management_and_Cleaning/blob/images/RIntro_2R4DScover.png?raw=true" style="width: 30%" class="center" />
+</center>
+
+---
+
+### Some basic concepts
+
+Before we learn some basic functioning of R, such as using it as a calculator, it is useful to know how to do some simple tasks, such as running code and identifying errors.
+
+By placing the cursor on a line OR highlighting a section of text, you can run code by either using `Cmd/Ctrl + Enter` on the keyboard or pressing the Run button:
+
+<img src="https://github.com/vervis/SANBI-GBIF_Data_Management_and_Cleaning/blob/images/RIntro_RunButton.png?raw=true" style="width: 70%" class="center" />
+
+You can pick up errors either from some diagnostics RStudio provides or interrogating the error messages provided by R in the console after running a line of code. For example:
+
+```{r echo=T, warning=FALSE}
+
+x y = 10
+
+```
+
+Comments are prefaced with the # symbol and are not read by R. Make copious use of commenting throughout your script. This is important for yourself to remember what you have done as well as for other people to understand what you did.
+
+---
+### R as a calculator
+
+```{r, echo=T, warning=F, message=F}
+# Basic calculations as on a calculator
+1 + 2
+1 / 200 * 30
+
+# Create objects
+x = 2 + 3
+x <- 2 + 3 #This is equivalent to the line above. I prefer the = sign - it's one less key to press, but most R users use the <- because apparently it's "confusing"to use =, although I don't think so.
+x
+
+```
+
+---
+
+### Variable naming styles
+
+i_use_snake_case
+
+otherPeopleUseCamelCase
+
+some.people.use.periods
+
+And_aFew.People_RENOUNCEconvention
+
+---
+
+### R functions and getting help
+
+```{r, echo=T, warning=F, message=F}
+# R has a large collection of built-in functions that are called like this:
+# function_name(arg1 = val1, arg2 = val2, ...)
+seq(1, 10)
+
+# This is telling R to produce a sequence of integers from 1 to 10. It's not apparent from the code above what the arguments for the function are. To find this out, use the ? to find help on a function
+?seq
+
+# So the code above is actually using the arguments below:
+seq(from=1, to=10)
+
+```
+
+---
+
+### Installing packages
+
+You can think of packages as mini apps for R. People are writing new packages all the time, providing new capabilities to manage, analyse and visualise data (among numerous other possibilities).
+
+Packages are collections of R functions, data, and compiled code in a well-defined format, created to add specific functionality. They typically have:
+* Functions
+* Help associated with these functions
+* A package description
+* User guides / vignettes (not always)
+
+Most packages need to be manually installed (although base R does come with a select list of packages already installed). You can see all the packages installed in the Packages tab in RStudio or using the code below.
+
+For detailed info on packages, have a look at <a href="https://www.geeksforgeeks.org/packages-in-r-programming/" target="_blank">this website</a> 
+
+
+---
+
+### Installing packages
+
+```{r, echo=T, warning=F, message=F, eval=F}
+#To see all packages installed:
+library()
+
+#Packages are installed from CRAN mirrors. It's a good idea to use one closest to you (for faster installation)
+getCRANmirrors()
+cran_mirrors = getCRANmirrors()
+#For SA, https://cran.mirror.ac.za/ is probably the best option
+
+#To install a new package (using code)
+install.packages("tidyverse", repos = "https://cran.mirror.ac.za/")
+
+#Before you can use the functions in a package, you need to "load" it:
+library(tidyverse)
+
+#pacman is a really cool package that allows for easy installation of packages at the same time as you load them. This is great for when you share scripts with other people:
+install.packages("pacman", repos = "https://cran.mirror.ac.za/")
+
+#Install pacman once (if not already installed)
+if(!"pacman" %in% installed.packages()) install.packages("pacman")
+#Load (and install) packages
+pacman::p_load(tidyverse, SDMtune)
+```
+
+---
+
+### Data and data formats
+
+```{r, echo=T, warning=F, message=F}
+# Load some packages that we will need
+library(nycflights13) #Package with data
+library(tidyverse) #R tidyverse group of packages with lots of useful data wrangling and plotting functions
+
+# Let's look at the flights dataset from the nycflights13 package
+data(flights)
+flights
+
+```
+
+R stores data in different formats, which the "tibble" above highlights, e.g., &lt;int&gt; is an integer, &lt;chr&gt; is a character object.
+
+---
+
+### dplyr and data wrangling
+
+`dplyr` is the key data wrangling package within the `tidyverse` group of packages.
+
+There are five key `dplyr` functions that allow you to solve the vast majority of your data manipulation challenges:
+
+* Pick observations by their values: `filter()`.
+* Reorder the rows: `arrange()`.
+* Pick variables by their names: `select()`.
+* Create new variables with functions of existing variables: `mutate()`.
+* Collapse many values down to a single summary: `summarise()`.
+
+---
+
+### Filter rows with filter()
+
+The first argument in `filter()` is the name of the data frame. The second and subsequent arguments are the expressions that filter the data frame.
+
+```{r, echo=T, warning=F, message=F}
+# Filter to get all flights on 1 Jan
+filter(flights, month == 1, day == 1)
+
+```
+
+---
+
+### Filter rows using base R
+
+It is also possible to select rows using base R notation. We are going to learn to do this because it is useful to understand "indexing" in R.
+
+```{r, echo=T, warning=F, message=F, eval = F}
+# Filter to get all flights on 1 Jan
+flights[flights$month==1 & flights$day==1,]
+# On the other hand, what is the line below doing?
+flights[1, 1]
+
+```
+
+---
+
+### Logical operators
+
+In the previous example of `filter()` we used == to select rows. Note the double equals sign, which denotes the "logical operator" equivalent of =. R has a number of other logical operators:
+
+.pull-left[
+```{r tables}
+knitr::kable(matrix(c('<','<=','>','>=','!=','!x','x|y','x&y',
+                      'less than','less than or equal to','greater than','greater than or equal to','not equal to','not x','x OR y','x AND y'), ncol = 2),
+             col.names = c("Operator","Description"), format = "html")
+```
+]
+
+.pull-right[
+Boolean operations as detailed in R4DS
+
+<img src="https://github.com/vervis/SANBI-GBIF_Data_Management_and_Cleaning/blob/images/RIntro_3LogicalOperators.png?raw=true" style="width: 100%" class="center" />
+]
+
+---
+
+### Arrange rows with arrange()
+
+The first argument in `arrange()` is the name of the data frame. The second and subsequent arguments are the expressions that order/arrange the data frame.
+
+```{r, echo=T, warning=F, message=F}
+# Filter to get all flights on 1 Jan
+arrange(flights, year, month, day) %>%
+  slice(1:3) #Selects only first 3 rows
+
+```
+
+You can use `desc()` to arrange in descending order.
+
+```{r, echo=T, warning=F, message=F}
+arrange(flights, desc(dep_delay)) %>%
+  slice(1:3) #Selects only first 3 rows
+```
+
+---
+
+### Select columns with select()
+
+`select()` allows you to narrow a dataset down to a few select columns.
+
+```{r, echo=T, warning=F, message=F}
+names(flights)
+
+#Select columns by name
+select(flights, year, month, day) %>%
+  slice(1:3) #Selects only first 3 rows
+
+#Select all columns except those from dep_time to time_hour
+select(flights, -(dep_time:time_hour)) %>%
+  slice(1:3) #Selects only first 3 rows
+```
+
+---
+
+### A quick aside...
+
+Later on when we use the terra package you may encounter conflicts between terra and dplyr with the use of select. To prevent this use $dplyr::select()$ in R to tell R to use the dplyr package $select()$
+
+---
+
+### Add new variables with mutate()
+
+```{r, echo=T, warning=F, message=F}
+#Create a smaller select dataset
+flights_sml <- select(flights, 
+  year:day, 
+  ends_with("delay"), 
+  distance, 
+  air_time
+)
+#Create new variables: gain and speed
+(flights_sml = mutate(flights_sml,
+  gain = dep_delay - arr_delay,
+  speed = distance / air_time * 60
+))
+```
+
+---
+
+### We can also create new variables using base R
+
+```{r, echo=T, warning=F, message=F}
+#Create new variables: gain and speed
+flights_sml = mutate(flights_sml,
+  gain = dep_delay - arr_delay,
+  speed = distance / air_time * 60
+)
+
+#This is equivalent to:
+flights_sml$gain = flights_sml$dep_delay - flights_sml$arr_delay
+flights_sml$speed = flights_sml$distance / flights_sml$air_time * 60
+```
+
+---
+
+### Grouped summaries with summarise()
+
+`summarise()` provides a one-row summary based on a specified function.
+
+```{r, echo=T, warning=F, message=F}
+#Get the mean departure delay
+summarise(flights, delay = mean(dep_delay, na.rm = TRUE))
+
+#Use the pipe (%>%) to do multiple things in one calculation
+flights %>% 
+  group_by(dest) %>% #This groups the data by "dest" - "summarise()" then provides a value for each "dest" level
+  summarise(
+    count = n(), #Get a count for each "dest" level
+    dist = mean(distance, na.rm = TRUE),
+    delay = mean(arr_delay, na.rm = TRUE)
+  ) %>% 
+  filter(count > 20, dest != "HNL") #Filter to rows that have counts>20 and the destination is not "HNL"
+
+```
+
+---
+
+### tibble vs data.frame
+
+The `tidyverse` ecosystem uses tibbles instead of dataframes. `data.frame` is the native R format of storing datasets, but lacks certain functionality and information that a tibble provides. The best way to understand this is through an example:
+
+```{r, echo=T, warning=F, message=F}
+head(iris) #iris is the most commonly used R example dataset and is stored as a data.frame. head is a function that gives a snapshot view of a dataset (first six lines)
+
+# Let's compare the above view of "iris" as a data.frame with it as a tibble
+as_tibble(iris)
+
+```
+
+---
+### RStudio projects
+
+What we are about to talk about next is **VERY important**. The reason I say this is because by learning how to use RStudio projects from the beginning will make your experience using R going forward so much more pleasant.
+
+RStudio when opened normally will be set to a default working directory. You can see what this is by typing:
+
+```{r echo=T, message=FALSE, warning=FALSE, results='hide'}
+getwd()
+```
+
+Your working directory will vary depending on your computer's administrator name and whether you have edited the default working directory in RStudio's global options. We can set the working directory using the function `setwd()`, but this is not recommended! You should rather create a RStudio project for each bit of work you are doing. RStudio will open to the predetermined working directory when you open your project, removing any fuss of setting working directories. It also allows other people to replicate your setup on their own computers, thereby facilitating collaboration. Within a project you can create multiple scripts.
+
+Let's try it out...
+
+---
+### RStudio projects
+
+<img src="https://github.com/vervis/SANBI-GBIF_Data_Management_and_Cleaning/blob/images/RIntro_rstudio-project.png?raw=true" style="width: 100%" class="center" />
+
+The first step is to click File -> New Project
+
+You can choose to either create a new directory or put the project in an existing directory. We will create a new one.
+
+Select "New Project".
+
+Specify a directory name, i.e. the folder in which your project will be stored. We will create one called "SANBI_SDM". Choose the subdirectory where you want to create your new directory.
+
+That's it! As simple as that!
+
+---
+
+### Project management
+
+Before we move on, just a quick aside about best practice for managing your code, data, outputs, etc. for each project you do.
+
+Within the SANBI_SDM folder that you created for this RStudio Project, it's a good idea to create a number of sub-folders that will keep things tidy, but more importantly, keep your raw data "untouched" and ensure that you send all manipulated data and outputs to separate directories. I'd suggest creating the following folders:
+* Code
+* Data
+* Outputs
+* Figures (maybe)
+
+Within these sub-directories you can obviously create more folders to separate stuff and keep things neat, e.g., folders for figures, cleaned data...
+
+You will find the data you will need for the course in the "Data" sub-directory in the "SANBI_SDM" directory.
+---
+
+### Reading data into R
+
+The `readr` package is the `tidyverse` way of reading data into R. However, R has some base functions that do the same thing, which we will also look at.
+
+`read_csv()` reads comma delimited files, `read_csv2()` reads semicolon separated files (common in countries where , is used as the decimal place), `read_tsv()` reads tab delimited files, and `read_delim()` reads in files with any delimiter.
+
+Base R uses `read.csv` or `read.table` to do the same sort of thing as the functions above. Let's take a look:
+
+```{r, echo=T, warning=F, message=F}
+#Let's try reading in an example dataset using the readr package
+datReadr = read_csv("../Data/Example_data_Pentameris_barbata.csv")
+datReadr %>% slice(1:3)
+
+#Now let's try using the base R function, read.csv()
+datBase = read.csv("../Data/Example_data_Pentameris_barbata.csv")
+datBase[1:3,]
+
+```
+
+Do you notice any differences in the outputs?
+
+---
+
+### You're set to go!
+
+We have now covered enough basic R functionality for you to progress with the course. It may take you a while to get your head around the way R "thinks", but just persevere and you will get it. The more you use R in your day to day work, the easier it will become.

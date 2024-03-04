@@ -1,0 +1,49 @@
+---
+title: |
+  | SANBI-GBIF training - Species Distribution Modelling:
+  | <font size="8">3. Occurrence data</font>
+author: "Vernon Visser"
+output: 
+   xaringan::moon_reader:
+      css: xaringan-themer.css
+      nature:
+         highlightStyle: default
+         highlightLines: true
+         countIncrementalSlides: false
+      includes: 
+        after_body: insert-logo.html
+
+---
+
+<style>
+pre code, pre, code {
+   overflow-x: visible !important;
+   white-space: pre-wrap;
+}
+.remark-slide-content {
+    padding: 0.5em 2em 0.5em 2em;
+}
+.remark-code {
+  font-size: 12px;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_mono_light(base_color = "#23395b")
+```
+
+
+
+
+### Occurrence data as part of the SDM process
+
+<center>
+<img src="https://github.com/vervis/SANBI-GBIF_SDMs/blob/980bede10aa657fb3404b24d9da4319d6446bca5/Images/Franklin.png?raw=true" style="width: 50%" class="center" />
+</center>
+
+---
