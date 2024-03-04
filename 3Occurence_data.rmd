@@ -47,3 +47,28 @@ style_mono_light(base_color = "#23395b")
 </center>
 
 ---
+
+
+### Occurrences as points
+
+<p>Occurrences are typically recorded and made available as point coordinates</p>
+
+<center>
+<img src="https://github.com/vervis/SANBI-GBIF_SDMs/blob/6c85c9268536a192e0d2bb42541c3282c8885361/Images/Occurrences_points.png?raw=true" style="width: 100%" class="center" />
+</center>
+
+---
+
+
+### Common errors with species occurrence data 
+
+<p>Coordinate errors:</p>
+
+* Spatial resolution
+* Zero lat/lon
+* Swapped lat and lon
+
+<center>
+<img src="https://github.com/vervis/SANBI-GBIF_SDMs/blob/578a7bf11c419dc465355d90e8d3a8c4d6dabc1a/Images/Coordinate_errors.png?raw=true" style="width: 100%" class="center" />
+</center>
+
