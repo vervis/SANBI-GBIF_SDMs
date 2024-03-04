@@ -46,8 +46,8 @@ style_mono_light(base_color = "#23395b")
 <img src="https://github.com/vervis/SANBI-GBIF_SDMs/blob/980bede10aa657fb3404b24d9da4319d6446bca5/Images/Franklin.png?raw=true" style="width: 50%" class="center" />
 </center>
 
----
 
+---
 
 ### Occurrences as points
 
@@ -57,8 +57,8 @@ style_mono_light(base_color = "#23395b")
 <img src="https://github.com/vervis/SANBI-GBIF_SDMs/blob/6c85c9268536a192e0d2bb42541c3282c8885361/Images/Occurrences_points.png?raw=true" style="width: 100%" class="center" />
 </center>
 
----
 
+---
 
 ### Common errors with species occurrence data 
 
@@ -71,4 +71,17 @@ style_mono_light(base_color = "#23395b")
 <center>
 <img src="https://github.com/vervis/SANBI-GBIF_SDMs/blob/578a7bf11c419dc465355d90e8d3a8c4d6dabc1a/Images/Coordinate_errors.png?raw=true" style="width: 100%" class="center" />
 </center>
+
+
+---
+
+### Common errors with species occurrence data 
+
+<p>Pseudoreplication: duplicate occurrences within grid cells of rasters used as predictor variables.</p>
+
+<center>
+<img src="https://github.com/vervis/SANBI-GBIF_SDMs/blob/d415b744e46536e4f5ac4406a5b97968c187b94f/Images/Pseudoreplication.png?raw=true" style="width: 60%" class="center" />
+</center>
+
+---
 
